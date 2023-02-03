@@ -1,18 +1,21 @@
 ###
-### A complete description of a Prefect Deployment for flow 'etl-parent-flow'
+### A complete description of a Prefect Deployment for flow 'main-flow'
 ###
-name: etl2
+name: gcs-to-bq-etl
 description: null
-version: 65b87892e5e3b321982142d4f7cfedf6
+version: c60b641f72fd2df2e1b85ac452e60ca5
 # The work queue that will handle this deployment's runs
 work_queue_name: default
 tags: []
-parameters: {}
-schedule:
-  cron: 0 0 * * *
-  timezone: null
-  day_or: true
+parameters: {months: [2, 3], color: "yellow", year: "2019"}
+schedule: null
 infra_overrides: {}
+
+###
+### DO NOT EDIT BELOW THIS LINE
+###
+flow_name: main-flow
+manifest_path: null
 infrastructure:
   type: process
   env: {}
@@ -21,39 +24,34 @@ infrastructure:
   command: null
   stream_output: true
   working_dir: null
+  _block_document_id: a086094e-9754-4995-b0bb-f06b4db35ec8
+  _block_document_name: anonymous-e5b9b303-89d7-4c53-8351-38cfe887cf07
+  _is_anonymous: true
   block_type_slug: process
   _block_type_slug: process
-
-###
-### DO NOT EDIT BELOW THIS LINE
-###
-flow_name: etl-parent-flow
-manifest_path: null
 storage: null
 path: /Users/rezkaaufar/Documents/projects/data-engineering-zoomcamp/week_2_workflow_orchestration
-entrypoint: 03_deployments/parameterized_flow.py:etl_parent_flow
+entrypoint: 02_gcp/etl_gcs_to_bq.py:main_flow
 parameter_openapi_schema:
   title: Parameters
   type: object
   properties:
     months:
       title: months
-      default:
-      - 1
-      - 2
       position: 0
       type: array
       items:
         type: integer
     year:
       title: year
-      default: 2021
       position: 1
       type: integer
     color:
       title: color
-      default: yellow
       position: 2
       type: string
-  required: null
+  required:
+  - months
+  - year
+  - color
   definitions: null
